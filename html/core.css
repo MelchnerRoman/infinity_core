@@ -1,0 +1,464 @@
+@font-face {
+   font-family: 'Satoshi-Variable';
+   src: url('fonts/Satoshi-Variable.woff2') format('woff2'),
+      url('fonts/Satoshi-Variable.woff') format('woff'),
+      url('fonts/Satoshi-Variable.ttf') format('truetype');
+   font-weight: 300 900;
+   font-style: normal;
+}
+
+body {
+    background-size:cover!important;
+     background: none!important;
+     background-color: transparent!important;
+     padding: 0px;
+     margin: 0px;
+     width: 100%;
+     height: 100%;
+     max-width: 100%;
+     max-height: 100%;
+     font-family: 'Satoshi-Variable'!important;
+     overflow: hidden;
+  }
+  :root {
+     --base-grid: 8px;
+  }
+  .notifications {
+     position: absolute;
+     height: 100%;
+     width: 100%;
+     overflow: hidden;
+  }
+  .notification {
+     background-color: rgba(0, 0, 0, 0.5);
+     color: white!important;
+     text-align: center;
+     font-family: 'Satoshi-Variable'!important;
+     padding: 1.5rem;
+  }
+  .notification .title {
+     font-family: 'Satoshi-Variable'!important;
+     font-weight: 700;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+     font-size: 18px;
+  }
+  .notification .text {
+     font-size: 18px;
+     font-family: 'Satoshi-Variable'!important;
+  }
+  
+  .town{
+   background:url('location.png');
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+   text-align: center;
+   min-width: 250px;
+   height: auto;
+   color:white!important;
+  }
+  
+  .redm {
+     background: linear-gradient(217deg, rgb(0 0 0 / 80%), rgba(255, 0, 0, 0) 70.71%), 
+     linear-gradient(127deg, rgb(0 0 0 / 80%), rgba(0, 255, 0, 0) 70.71%), 
+     linear-gradient(336deg, rgb(0 0 0 / 80%), rgba(0, 0, 255, 0) 70.71%);
+     letter-spacing: 2px;
+  }
+  .redm_min {
+     background-color: transparent;
+     letter-spacing: 2px;
+  }
+  .redm_3d {
+     background-color: transparent;
+     transform: perspective(500px) rotateY(15deg);
+  }
+  .redm_kill {
+     background-color: transparent;
+  }
+  .redm_prompt {
+     background-color: transparent;
+  }
+  .infinitycore {
+   background: linear-gradient(90deg, rgb(0 0 0 / 42%) 0%, rgb(0 0 0 / 45%) 85%, rgb(0 212 255 / 0%) 100%)!important;
+   border-top: solid 1px #202628;
+   border-bottom: solid 1px #202628;
+   min-width: 300px;
+   filter: blur(0.2px);
+   line-height: 25px;
+   transform: perspective(500px) rotateY(2deg);
+  }
+  .loader_icon{
+     width: 30px;
+     height: 30px;
+     margin-top: 25px;
+  }
+  @-webkit-keyframes rotating{
+     from {
+       -webkit-transform: rotate(0deg);
+       -o-transform: rotate(0deg);
+       transform: rotate(0deg);
+     }
+     to {
+       -webkit-transform: rotate(360deg);
+       -o-transform: rotate(360deg);
+       transform: rotate(360deg);
+     }
+   }
+   @keyframes rotating {
+     from {
+       -ms-transform: rotate(0deg);
+       -moz-transform: rotate(0deg);
+       -webkit-transform: rotate(0deg);
+       -o-transform: rotate(0deg);
+       transform: rotate(0deg);
+     }
+     to {
+       -ms-transform: rotate(360deg);
+       -moz-transform: rotate(360deg);
+       -webkit-transform: rotate(360deg);
+       -o-transform: rotate(360deg);
+       transform: rotate(360deg);
+     }
+   }
+   .rotating {
+     -webkit-animation: rotating 2s linear infinite;
+     -moz-animation: rotating 2s linear infinite;
+     -ms-animation: rotating 2s linear infinite;
+     -o-animation: rotating 2s linear infinite;
+     animation: rotating 2s linear infinite;
+   }
+  .top_large {
+     position: absolute;
+     top: 8%;
+     width: 100%;
+     left: 0;
+  }
+  .top_left {
+     position: absolute;
+     left: 20px;
+     top: 8%;
+  }
+  .top_right {
+     position: absolute;
+     right: 20px;
+     top: 8%;
+  }
+  .top_center {
+     position: absolute;
+     left: 50%;
+     top: 8%;
+     transform: translate(-50%,-50%);
+  }
+  .center_large {
+     position: absolute;
+     width: 100%;
+     bottom: 50%;
+     left: 0;
+  }
+  .center_right {
+     position: absolute;
+     right: 0;
+     bottom: 50%;
+  }
+  .center_left {
+     position: absolute;
+     left: 0;
+     bottom: 50%;
+  }
+  
+  .center_left_marg {
+   position: absolute;
+   left: 20px;
+   bottom: 50%;
+  }
+  
+  .center_center {
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+  }
+  
+  .bottom_large {
+     position: absolute;
+     width: 100%;
+     bottom: 8%;
+     left: 0;
+  }
+  .bottom_right {
+     position: absolute;
+     right: 20px;
+     bottom: 8%;
+  }
+  .bottom_left {
+     position: absolute;
+     left: 20px;
+     bottom: 8%;
+  }
+  .center_bottom {
+   position: absolute;
+   left: 50%;
+   bottom: 8%;
+   transform: translate(-50%,-50%);
+   z-index: 950000;
+  }
+  .bottom_center {
+     position: absolute;
+     left: 50%;
+     bottom: 8%;
+     transform: translate(-50%,-50%);
+     z-index: 950000;
+  }
+  .contain_hud {
+     width: 100%;
+     height: 100%;
+     position: relative;
+     right: -1px;
+  }
+  .contain_hud .area_economy {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: 10rem;
+    min-width: 50px;
+    color: white;
+    transform: perspective(500px) rotateY( 343deg);
+}
+  .contain_hud .area_economy #kill, .contain_hud .area_economy #water, .contain_hud .area_economy #eat, .contain_hud .area_economy #degres, .contain_hud .area_economy #hp, .contain_hud .area_economy #golds, .contain_hud .area_economy #xp, .contain_hud .area_economy #cash {
+    text-align: center;
+     margin: 0.2rem 0;
+    font-size: 14px;
+    font-family: 'Satoshi-Variable'!important;
+}
+  .contain_hud .icon{
+     width: 25px;
+     height: 25px;
+     margin-left: 0.5rem;
+  }
+  #actions_ui {
+     display: none;
+     position: absolute;
+     top: 0;
+     width: 100%;
+     height: 100%;
+  }
+  .content_box{
+     position:relative;
+     z-index: 9555;
+  }
+  .links img{
+   width: 50px;
+  }
+  .links span{
+   text-transform: uppercase;
+   font-weight: 600;
+   font-family: 'Satoshi-Variable'!important;
+  }
+  .links {
+     --link-size: calc(var(--base-grid)*20);
+     color: var(--colour-black);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 100%;
+     min-height: 100vh;
+   }
+   .links__list {
+     position: relative;
+     list-style: none;
+   }
+   .links__item {
+     width: var(--link-size);
+     height: var(--link-size);
+     position: absolute;
+     top: 0;
+     left: 0;
+     margin-top: calc(var(--link-size)/-2);
+     margin-left: calc(var(--link-size)/-2);
+     --angle: calc(360deg/var(--item-total));
+     --rotation: calc(140deg + var(--angle)*var(--item-count));
+     transform: rotate(var(--rotation)) translate(calc(var(--link-size) + var(--base-grid)*2)) rotate(calc(var(--rotation)*-1));
+   }
+   .links__link {
+     opacity: 0;
+     animation: on-load .3s ease-in-out forwards;
+     animation-delay: calc(var(--item-count)*150ms);
+     width: 80%;
+     height: 80%;
+     border-radius: 50%;
+     position: relative;
+     background-color: #00000081;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     text-decoration: none;
+     color: white;
+   }
+   .links__icon {
+     width: calc(var(--base-grid)*8);
+     height: calc(var(--base-grid)*8);
+     transition: all .3s ease-in-out;
+     fill: var(--colour-black);
+   }
+   .links__text {
+     position: absolute;
+     width: 100%;
+     left: 0;
+     text-align: center;
+     height: calc(var(--base-grid)*2);
+     font-size: calc(var(--base-grid)*2);
+     display: none;
+     bottom: calc(var(--base-grid)*8.5);
+     animation: text .3s ease-in-out forwards;
+   }
+   .links__link:after {
+     content: "";
+     background-color: transparent;
+     width: var(--link-size);
+     height: var(--link-size);
+     border: 2px dashed var(--colour-white);
+     display: block;
+     border-radius: 50%;
+     position: absolute;
+     top: 0;
+     left: 0;
+     transition: all .3s cubic-bezier(.53,-.67,.73,.74);
+     transform: none;
+     opacity: 0;
+   }
+   .links__link:hover .links__icon {
+     transition: all .3s ease-in-out;
+     transform: translateY(calc(var(--base-grid)*-1));
+   }
+   .links__link:hover .links__text {
+     display: block;
+   }
+   .links__link:hover:after {
+     transition: all .3s cubic-bezier(.37,.74,.15,1.65);
+     transform: scale(1.1);
+     opacity: 1;
+   }
+  @keyframes on-load {
+   0% {
+     opacity: 0;
+     transform: scale(.3);
+   }
+   70% {
+     opacity: .7;
+     transform: scale(1.1);
+   }
+   100% {
+     opacity: 1;
+     transform: scale(1);
+   }
+  }
+  @keyframes text {
+   0% {
+     opacity: 0;
+     transform: scale(0.3) translateY(0);
+   }
+   100% {
+     opacity: 1;
+     transform: scale(1) translateY(calc(var(--base-grid)*5));
+   }
+  }
+  
+  .eat_jauge{
+   background:black!important;
+   border-radius: 0!important;
+   height: 20px;
+  }
+  
+  .eat_jauge .progress-bar{
+   background:#795548;
+   text-align: center;
+   overflow: visible;
+  }
+  
+  .drink_jauge{
+   background:black!important;
+   border-radius: 0!important;
+   height: 20px;
+  }
+  
+  .drink_jauge .progress-bar{
+   background:#504de2;
+   text-align: center;
+   overflow: visible;
+  }
+  
+  .hp_jauge{
+   background:black!important;
+   border-radius: 0!important;
+   height: 20px;
+  }
+  
+  .hp_jauge .progress-bar{
+   background:#0e8a5a;
+   text-align: center;
+   overflow: visible;
+  }
+  
+#progress{
+   position: absolute;
+   top:0;
+   width: 100%;
+}
+
+.area_economy .progress{
+   border-radius: 50%!important;
+   height: 40px!important;
+   width: 40px!important;
+}
+
+.icon_health {
+   position: absolute;
+   background: url('items/player_health.png');
+   background-size: contain;
+   background-position: center;
+   background-repeat: no-repeat;
+   left: 8px;
+   height: 23px;
+   width: 23px;
+}
+
+.icon_water {
+   position: absolute;
+   background: url('items/player_water.png');
+   background-size: contain;
+   background-position: center;
+   background-repeat: no-repeat;
+   left: 8px;
+   height: 23px;
+   width: 23px;
+}
+
+.icon_eat {
+   position: absolute;
+   background: url('items/player_eat.png');
+   background-size: contain;
+   background-position: center;
+   background-repeat: no-repeat;
+   left: 8px;
+   height: 23px;
+   width: 23px;
+}
+
+#degres {
+   border-radius: 50%!important;
+   height: 40px!important;
+   width: 40px!important;
+   background: black!important;
+   line-height: 36px;
+}
+
+#idplayer {
+   border-radius: 50%!important;
+   height: 40px!important;
+   width: 40px!important;
+   background: black!important;
+   line-height: 36px;
+   text-align: center;
+   font-size: 12px;
+}

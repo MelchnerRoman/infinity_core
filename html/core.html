@@ -1,0 +1,97 @@
+<html>
+  <head>
+      <link rel="stylesheet" href="core.css" type="text/css">
+      <link href="./vendor/bootstrap.css" rel="stylesheet">
+      <link href="./vendor/animations.css" rel="stylesheet">
+      <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+      <script src="./vendor/menu/main.js" type="text/javascript"></script>
+  </head>
+<body data-controller="framework">
+
+  <!-- notifications -->
+  <div class="notifications"></div>
+
+  <!-- HUD -->
+  <div id="hud" style="display: none;">
+    <section id="progress"></section>
+    <section class="d-flex flex-column contain_hud">
+      <div class="area_economy d-flex flex-column">
+        <!-- <div id="kill"></div> -->
+        <div id="cash"></div>
+        <div id="golds"></div>
+        <!-- <div id="xp"></div> -->
+        <div id="hp"></div>
+        <div id="water"></div>
+        <div id="eat"></div>
+        <div id="degres"></div>
+        <div id="idplayer"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Get par from fetch -->
+  <div id="showPart"></div>
+
+  <!-- others -->
+  <div id="actions_ui" data-controller="frameworkactions">
+    <button data-action="click->frameworkactions#closeActionWheel">FERME IIC</button>
+      <div class="d-flex h-100 container w-100">
+          <div class="m-auto content_box d-flex">
+              <div class="links">
+                  <ul class="links__list" style="--item-total:8">
+                    <li class="links__item action_cash" style="--item-count:1">
+                      <span class="links__link">
+                        <img src="./items/money_coinpurse.png">
+                        <span>CASH</span>
+                      </span>
+                    </li>
+                    <li class="links__item action_gold" style="--item-count:2">
+                      <span class="links__link">
+                        <img src="./items/provision_gold_nugget.png">
+                        <span>GOLD</span>
+                      </span>
+                    </li>
+                    <li class="links__item action_close" style="--item-count:3">
+                      <span class="links__link">
+                        <img src="./items/cross.png">
+                      </span>
+                    </li>
+                    <li class="links__item action_id" style="--item-count:4">
+                      <span class="links__link">
+                        <img src="./items/id.png">
+                        <span>ID</span>
+                      </span>
+                    </li>
+                    <li class="links__item action_bandana" style="--item-count:5">
+                      <span class="links__link">
+                        <img src="./items/kit_bandana.png">
+                        <span>Bandana</span>
+                      </span>
+                    </li>
+                    <li class="links__item action_handsup" style="--item-count:6">
+                      <span class="links__link">
+                        <img src="./items/clothing_generic_glove.png">
+                        <span>handsup</span>
+                      </span>
+                    </li>
+                    <li class="links__item action_coords" style="--item-count:7">
+                      <span class="links__link">
+                        <img src="./items/provision_pearsons_naval_compass.png">
+                        <span>COORDS</span>
+                      </span>
+                    </li>
+                    <li class="links__item action_inventory" style="--item-count:8">
+                      <span class="links__link">
+                        <img src="./items/stachel.png">
+                        <span>INVENTORY</span>
+                      </span>
+                    </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <script src="./FrameworkController.js" type="module"></script>
+</body>
+</html>
