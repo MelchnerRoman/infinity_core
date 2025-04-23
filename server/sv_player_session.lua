@@ -257,7 +257,7 @@ function(SaveDatas)
 				SaveDatas._Gang, 
 				SaveDatas._GangRank,
 				SaveDatas._Inventory,
-				os.time(),
+				dateLisible,
 				SourceSteamID,
 				SaveDatas._Charid
 			})
