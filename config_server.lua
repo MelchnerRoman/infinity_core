@@ -64,3 +64,9 @@ Config.Golds                = 0.0
 Config.Food                 = 100   
 Config.Drink                = 100 
 Config.InitXP               = 10 
+
+
+-----
+-- [ CALLBACK ]
+-----
+Config.CallbackTimeout      = 10000                 -- Default timeout for callbacks (in ms)

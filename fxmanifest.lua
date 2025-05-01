@@ -9,7 +9,9 @@ rdr3_warning 		'I acknowledge that this is a prerelease build of RedM, and I am 
 author 	     		'ALTITUDE-DEV.COM'
 description  		'FRAMEWORK INFINITY'
 version 	 		'1.0.0'
+lua54 'yes'
 infinitycore_dev 	 'Shepard & iireddev'
+
 
 ui_page "html/core.html"
 
@@ -43,6 +45,7 @@ client_scripts {
 	'shared/dataview.lua',
 	'client/general/cl_functions.lua',
 	'client/cl_framework.lua',
+	'client/cl_callback.lua',
 	'client/general/cl_player_core.lua',
 	'client/general/cl_notifications.lua',
 	'client/general/cl_hud.lua',
@@ -62,12 +65,14 @@ server_scripts {
 	'config_discord.lua',
 	'lang/*.lua',
 	'shared/permissions.lua',
-	'server/sv_player_core.lua',
-	'server/sv_player_init.lua',
-	'server/sv_player_session.lua',
-	'server/sv_player_economy.lua',
-	'server/sv_admin_cmd.lua',
-	'server/sv_triggers.lua',
+	'server/*.lua',
+	-- 'server/sv_player_core.lua',
+	-- 'server/sv_player_init.lua',
+	-- 'server/sv_player_session.lua',
+	-- 'server/sv_player_economy.lua',
+	-- 'server/sv_admin_cmd.lua',
+	-- 'server/sv_triggers.lua',
+	-- 'server/sv_callback.lua',
 	'communication/discord/sv_*.lua',
 	'communication/chat/sv_chat.lua'
 }
@@ -80,7 +85,12 @@ exports {
 	'getSex',
 	'infinityPrint',
 	'GetTownPlayer',
-	'RandomInt'
+	'RandomInt',
+    -- Callbacks Infinity
+    'RegisterClientCallback',
+    'TriggerServerCallback',
+    'TriggerSyncServerCallback',
+    'TriggerAwaitServerCallback'
 }
 
 server_exports {
@@ -100,7 +110,12 @@ server_exports {
     'isRolePresent',
 	'infinityPrint',
 	'RandomInt',
-	'roundValue'
+	'roundValue',
+    -- Callbacks Infinity
+    'RegisterServerCallback',
+    'TriggerClientCallback',
+    'TriggerSyncClientCallback',
+    'TriggerAwaitClientCallback'
 }
 
 dependency {'oxmysql', '/onesync'}
@@ -108,21 +123,3 @@ dependency {'oxmysql', '/onesync'}
 -- For Protect the work and get a updates by a team benevol
 -- COPYRIGHT https://data.inpi.fr/marques/FR4856753?q=altitude%20dev#FR4856753
 -- Only 2 files are locked by CFX for protect the Framework Core API, you dont need this files
-
-lua54 'yes'
-escrow_ignore {
-    'client/general/*.lua',
-	'communication/chat/*.lua',
-	'communication/discord/*.lua',
-	'lang/*.lua',
-	'shared/*.lua',
-	'shared/*.json',
-	'config_discord.lua',
-	'config_server.lua',
-	'client/*.lua',
-	'server/sv_admin_cmd.lua',
-	'server/sv_player_core.lua',
-	'server/sv_player_economy.lua',
-	'server/sv_player_init.lua',
-	'server/sv_triggers.lua'
-}
