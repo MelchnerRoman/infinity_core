@@ -58,7 +58,7 @@ AddEventHandler('infinity_core:loadDatasPlayer', function(source)
 
         local currentBonusStamina   = Config.StaminaIncreaseValue
 
-        while NetworkIsSessionStarted() do 
+        while NetworkIsSessionStarted() do
 
                 -- // No regen the life
                 if Config.DisableAutoRegen then
@@ -73,47 +73,47 @@ AddEventHandler('infinity_core:loadDatasPlayer', function(source)
 
                 if not spawnedFirst then
                     SetMinimapType(Config.TypeRadar)
-                    Firsthealth                     = 100 
+                    Firsthealth                     = 100
                     spawnedFirst                    = true
                 end
 
                 local temperature           = exports.infinity_needs:Temp_Metabolism()    -- return temperature
-                local p_coords              = GetEntityCoords(PlayerPedId())            -- get coords            
-                local p_heading             = GetEntityHeading(PlayerPedId())           -- get heading        
+                local p_coords              = GetEntityCoords(PlayerPedId())            -- get coords
+                local p_heading             = GetEntityHeading(PlayerPedId())           -- get heading
                 Gethealth                   = GetEntityHealth(PlayerPedId())
-            
-                if not hudAreSet then     
+
+                if not hudAreSet then
                     hudAreSet = true
                     TriggerServerEvent('infinity_core:DatasPlayer', _InfinitySource, temperature, kill) -- (SQL REQUEST X1)
                 end
 
-                if hudAreSet and lifeisSet and Playing then   
+                if hudAreSet and lifeisSet and Playing then
                     TriggerServerEvent("infinity_core:save_pos", _InfinitySource, p_coords.x, p_coords.y, p_coords.z, p_heading, water, eat, Gethealth, CharID)
                 end
 
                 -- // Stamina Restore enabled
-                if Config.RestoreStamina then 
-                    local addstamina = GetAttributeCoreValue(PlayerPedId(), 1) + currentBonusStamina 
+                if Config.RestoreStamina then
+                    local addstamina = GetAttributeCoreValue(PlayerPedId(), 1) + currentBonusStamina
                     Citizen.InvokeNative(0xC6258F41D86676E0, PlayerPedId(), 1, addstamina)
                     local a2 = DataView.ArrayBuffer(12* 8)
                     local a3 = DataView.ArrayBuffer(12* 8)
                     Citizen.InvokeNative("0xCB5D11F9508A928D", 1, a2:Buffer(), a3:Buffer(), GetHashKey("UPGRADE_STAMINA_TANK_1"), 1084182731, Config.MaxCoreStamina, 752097756)
                 end
-                
+
                 if hudAreSet and not lifeisSet and initialhp and Playing then
                     Wait(655)
                     SetEntityHealth(PlayerPedId(), initialhp)
-                    health                   = exports.infinity_needs:Health_Metabolism(initialhp)    
-                    eat                      = exports.infinity_needs:Eat_Metabolism(initialEat)       
-                    water                    = exports.infinity_needs:Water_Metabolism(initialWater) 
+                    health                   = exports.infinity_needs:Health_Metabolism(initialhp)
+                    eat                      = exports.infinity_needs:Eat_Metabolism(initialEat)
+                    water                    = exports.infinity_needs:Water_Metabolism(initialWater)
                     lifeisSet                = true
                 elseif lifeisSet and hudAreSet and Playing then
-                    Gethealth               = exports.infinity_needs:Health_Metabolism(Gethealth)   
-                    eat                     = exports.infinity_needs:Eat_Metabolism(eat)      
-                    water                   = exports.infinity_needs:Water_Metabolism(water) 
+                    Gethealth               = exports.infinity_needs:Health_Metabolism(Gethealth)
+                    eat                     = exports.infinity_needs:Eat_Metabolism(eat)
+                    water                   = exports.infinity_needs:Water_Metabolism(water)
                     TriggerServerEvent('infinity_core:DatasPlayerClient', _InfinitySource, Gethealth, temperature, water, eat, kill)
                 end
-    
+
             Citizen.Wait(1700)
         end
     end)
@@ -131,7 +131,7 @@ end
 -----
 RegisterNetEvent('infinity_core:hudDatas')
 AddEventHandler('infinity_core:hudDatas', function(bank, cash, golds, xp, hp, temperature, eat, water, coordinates, CharSelected)
-   
+
     local playerPed = GetPlayerPed(-1)
     initialhp       = hp
     initialEat      = eat
@@ -143,14 +143,14 @@ AddEventHandler('infinity_core:hudDatas', function(bank, cash, golds, xp, hp, te
 
     -- Enable Hud with current data from DB
     SetDisplayHud(not display, cash, golds, xp, initialhp, temperature, water, eat, kill, CharSelected, _InfinitySource) -- Set Hud
-    
+
     -- Load Identity and make Session with Clothes and Skin
     LoadIdentity(_InfinitySource, CharSelected)
 
     -- Disable Immunity
     FreezeEntityPosition(PlayerPedId(), false)
     SetPlayerInvincible(PlayerPedId(), false)
-    
+
     -- Teleport player to the last position
     SetEntityCoords( PlayerPedId(), tonumber(coordinates.x), tonumber(coordinates.y), tonumber(coordinates.z) )
 
@@ -244,22 +244,31 @@ end
 -- [ LEVEL/XP MANAGER ]
 -----
 function LevelPlayer(XPClass)
-    levels              = LoadResourceFile(GetCurrentResourceName(), "/shared/levels.json")
-    extract             = json.decode(levels)
+    local levelsData = LoadResourceFile(GetCurrentResourceName(), "/shared/levels.json")
+    if not levelsData then
+        print("[LevelPlayer] levels.json missing or unreadable")
+        return 1, XPClass or 0
+    end
+    local extract = json.decode(levelsData)
+    if not extract or not extract.levels then
+        print("[LevelPlayer] levels.json malformed or missing 'levels' key")
+        return 1, XPClass or 0
+    end
+    local Level = 1
     for i, json in pairs(extract.levels) do
-        if XPClass ~= nil then 
-            if XPClass >= json.exp and json.explimit > XPClass then
-                Level = json.lvl
+        if XPClass ~= nil then
+            if tonumber(XPClass) >= tonumber(json.exp) and tonumber(json.explimit) > tonumber(XPClass) then
+                Level = tonumber(json.lvl) or 1
                 break
             end
         end
     end
-    return Level, XPClass
+    return Level, XPClass or 0
 end
 
 function XpReturn()
-    local PlayerDatas       = GetPlayerSession()
-    XPClass                 = PlayerDatas._Xp
-    LevelPlayer(XPClass)
-    return Level, XPClass
+    local PlayerDatas = GetPlayerSession and GetPlayerSession() or nil
+    local XPClass = PlayerDatas and tonumber(PlayerDatas._Xp) or 0
+    local Level, XP = LevelPlayer(XPClass)
+    return Level or 1, XP or 0
 end

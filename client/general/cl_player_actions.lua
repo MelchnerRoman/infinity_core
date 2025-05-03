@@ -4,7 +4,8 @@
 TriggerEvent('chat:addSuggestion', '/myrank', 'Get your current rank in the server', {})
 RegisterCommand('myrank', function(source, args)
   local PlayerDatas = GetPlayerSession(source)
-  exports.infinity_core:notification(_InfinitySource, "<b class='text-warning'>Your Rank</b><br>"..PlayerDatas._Rank, '', 'center_left', 'infinitycore', 2500)      
+  local rank = PlayerDatas and PlayerDatas._Rank or 'Unknown'
+  exports.infinity_core:notification(_InfinitySource, "<b class='text-warning'>Your Rank</b><br>"..rank, '', 'center_left', 'infinitycore', 2500)
 end)
 
 -----
@@ -13,7 +14,7 @@ end)
 hideUI = false
 TriggerEvent('chat:addSuggestion', '/hideui', 'Display or Show the UI icons', {})
 RegisterCommand('hideui', function(source, args, raw)
-    if not hideUI then 
+    if not hideUI then
         hideUI = true
         Citizen.InvokeNative(0xC116E6DF68DCE667, 0, 0)          -- Enable Stamina Core Inside
         Citizen.InvokeNative(0xC116E6DF68DCE667, 1, 0)          -- Show Stamina Core Outside
@@ -34,66 +35,71 @@ end, false)
 TriggerEvent('chat:addSuggestion', '/rpinfos', 'Get your current roleplay infos in the server', {})
 RegisterCommand('rpinfos', function(source, args)
   local PlayerDatas = GetPlayerSession(source)
+  local charid = PlayerDatas and PlayerDatas._Charid or 'N/A'
+  local firstname = PlayerDatas and PlayerDatas._Firstname or 'N/A'
+  local lastname = PlayerDatas and PlayerDatas._Lastname or 'N/A'
+  local years = PlayerDatas and PlayerDatas._Years or 'N/A'
+  local nation = PlayerDatas and PlayerDatas._Nation or 'N/A'
   exports.infinity_core:notification(
-        _InfinitySource, 
-        "<b class='text-info'>Your Roleplay Informations</b>", 
-        "CharID: "..PlayerDatas._Charid.." RP: "..PlayerDatas._Firstname.." "..PlayerDatas._Lastname.." "..PlayerDatas._Years.." years from "..PlayerDatas._Nation, 
-        'center_left', 
-        'infinitycore', 
+        _InfinitySource,
+        "<b class='text-info'>Your Roleplay Informations</b>",
+        "CharID: "..charid.." RP: "..firstname.." "..lastname.." "..years.." years from "..nation,
+        'center_left',
+        'infinitycore',
         2500
-    )      
+    )
 end)
 
 ----
 -- [[ /getsession ]]
 ----
 TriggerEvent('chat:addSuggestion', '/getsession', 'Show your current session', {})
-RegisterCommand("getsession", function(source, args) 
+RegisterCommand("getsession", function(source, args)
     local PlayerDatas = GetPlayerSession(source)
     print('### ^6Your current Session^0 ###')
     print('-----------------------')
-    print('Server ID ^4'..PlayerDatas._InfinitySource..'^0')
-    print('Character ID^4 '..PlayerDatas._Charid..'^0')
-    print('RankServer ^4'..PlayerDatas._Rank..'^0')
+    print('Server ID ^4'..(PlayerDatas and PlayerDatas._InfinitySource or 'N/A')..'^0')
+    print('Character ID^4 '..(PlayerDatas and PlayerDatas._Charid or 'N/A')..'^0')
+    print('RankServer ^4'..(PlayerDatas and PlayerDatas._Rank or 'N/A')..'^0')
     print('-----------------------')
-    print('Lastname ^6'..PlayerDatas._Lastname..'^0')
-    print('Firstname ^6'..PlayerDatas._Firstname..'^0')
-    print('Sex ^4 '..PlayerDatas._Sex..'^0')
-    print('Nation ^6'..PlayerDatas._Nation..'^0')
-    print('Years ^6'..PlayerDatas._Years..'^0')
+    print('Lastname ^6'..(PlayerDatas and PlayerDatas._Lastname or 'N/A')..'^0')
+    print('Firstname ^6'..(PlayerDatas and PlayerDatas._Firstname or 'N/A')..'^0')
+    print('Sex ^4 '..(PlayerDatas and PlayerDatas._Sex or 'N/A')..'^0')
+    print('Nation ^6'..(PlayerDatas and PlayerDatas._Nation or 'N/A')..'^0')
+    print('Years ^6'..(PlayerDatas and PlayerDatas._Years or 'N/A')..'^0')
     print('-----------------------')
-    print('Bank ^2'..PlayerDatas._Bank..'$^0')
-    print('Cash ^2'..PlayerDatas._Cash..'$^0')
-    print('Golds ^2'..PlayerDatas._Gold..'kg^0')
-    print('XP ^3'..PlayerDatas._Xp..'^0')
+    print('Bank ^2'..(PlayerDatas and PlayerDatas._Bank or 'N/A')..'$^0')
+    print('Cash ^2'..(PlayerDatas and PlayerDatas._Cash or 'N/A')..'$^0')
+    print('Golds ^2'..(PlayerDatas and PlayerDatas._Gold or 'N/A')..'kg^0')
+    print('XP ^3'..(PlayerDatas and PlayerDatas._Xp or 'N/A')..'^0')
     print('-----------------------')
-    print('Gang ^6'..PlayerDatas._Gang..'^0')
-    print('GangRank ^6'..PlayerDatas._GangRank..'^0')
-    print('Job ^6'..PlayerDatas._Job..'^0')
-    print('JobGrade ^6'..PlayerDatas._JobGrade..'^0')
+    print('Gang ^6'..(PlayerDatas and PlayerDatas._Gang or 'N/A')..'^0')
+    print('GangRank ^6'..(PlayerDatas and PlayerDatas._GangRank or 'N/A')..'^0')
+    print('Job ^6'..(PlayerDatas and PlayerDatas._Job or 'N/A')..'^0')
+    print('JobGrade ^6'..(PlayerDatas and PlayerDatas._JobGrade or 'N/A')..'^0')
     print('-----------------------')
 end)
 
 -----
 -- [ /viptp 1-13 ]
 -----
-TriggerEvent('chat:addSuggestion', '/viptp', 'For VIP/ALPHA Only use this for teleport player', 
+TriggerEvent('chat:addSuggestion', '/viptp', 'For VIP/ALPHA Only use this for teleport player',
 {{ name="TP_ID", help="Range min: 1 and max: 13" }})
 RegisterCommand('viptp', function(source, args)
  local PlayerDatas = GetPlayerSession(source)
-  if PlayerDatas._Rank == "vip" then
-      if args[1] ~= nil then 
+  if PlayerDatas and PlayerDatas._Rank == "vip" then
+      if args[1] ~= nil then
         TP = args[1]
-        exports.infinity_core:notification(_InfinitySource, "<b class='text-warning'>VIP</b>", 'Teleport used', 'center_left', 'infinitycore', 2500)      
+        exports.infinity_core:notification(_InfinitySource, "<b class='text-warning'>VIP</b>", 'Teleport used', 'center_left', 'infinitycore', 2500)
         local playerPed = PlayerPedId()
         if (TP == '1') then
-              SetEntityCoords(playerPed, -3622.04,-2612.9,-13.61) 
+              SetEntityCoords(playerPed, -3622.04,-2612.9,-13.61)
           elseif (TP == '2') then
-              SetEntityCoords(playerPed, -238.11,744.48,116.68) 
+              SetEntityCoords(playerPed, -238.11,744.48,116.68)
           elseif (TP == '3') then
-              SetEntityCoords(playerPed, -908.72,-1366.0,45.41) 
+              SetEntityCoords(playerPed, -908.72,-1366.0,45.41)
           elseif (TP == '4') then
-              SetEntityCoords(playerPed, -1781.67,-378.35,158.14) 
+              SetEntityCoords(playerPed, -1781.67,-378.35,158.14)
           elseif (TP == '5') then
               SetEntityCoords(playerPed, 2786.52, -1134.05, 46.62)
           elseif (TP == '6') then
@@ -109,13 +115,13 @@ RegisterCommand('viptp', function(source, args)
           elseif (TP == '11') then
               SetEntityCoords(playerPed, 1299.68,-1330.98,77.5)
           elseif (TP == '12') then
-              SetEntityCoords(playerPed, -1351.61, 2437.75, 308.43, 235.79)     
+              SetEntityCoords(playerPed, -1351.61, 2437.75, 308.43, 235.79)
           elseif (TP == '13') then
-              SetEntityCoords(playerPed, -2502.09, -2416.38, 60.59, 197.59) 
+              SetEntityCoords(playerPed, -2502.09, -2416.38, 60.59, 197.59)
           end
       end
     else
-    exports.infinity_core:notification(_InfinitySource, "<b class='text-danger'>No Access</b>", 'You do not have permission to access this command', 'center_left', 'infinitycore', 2500)      
+    exports.infinity_core:notification(_InfinitySource, "<b class='text-danger'>No Access</b>", 'You do not have permission to access this command', 'center_left', 'infinitycore', 2500)
   end
 end)
 
@@ -131,10 +137,12 @@ end)
 -- [ /mylvl ]
 -----
 TriggerEvent('chat:addSuggestion', '/mylvl', 'Check your current level and xp', {})
-RegisterCommand('mylvl', function(source)
+RegisterCommand('mylvl', function(source, args)
     local PlayerDatas           = GetPlayerSession(source)
     local PlayerLevel, PlayerXP = XpReturn()
-    exports.infinity_core:notification(_InfinitySource, "Level "..PlayerLevel, "<small>With "..PlayerDatas._Xp.." XP</small>", "center_right", "infinitycore", 2500)
+    local xp = PlayerDatas and PlayerDatas._Xp or 'N/A'
+    local levelDisplay = PlayerLevel ~= nil and tostring(PlayerLevel) or 'N/A'
+    exports.infinity_core:notification(_InfinitySource, "Level "..levelDisplay, "<small>With "..xp.." XP</small>", "center_right", "infinitycore", 2500)
 end, false)
 
 -----
@@ -186,7 +194,7 @@ RegisterCommand("pay", function(source, args, rawCommand)
                 exports.infinity_core:notification(_InfinitySource, Config.ERROR, "Argument #1 or #2 is bad", "center_right", "redm_min", 2500)
             else
                 animationSatchel()
-                TriggerServerEvent("infinity_core:pay", _InfinitySource, args[1], args[2], PlayerDatas, 
+                TriggerServerEvent("infinity_core:pay", _InfinitySource, args[1], args[2], PlayerDatas,
                 function(cb)
                 end)
             end
@@ -222,7 +230,7 @@ RegisterNUICallback("inventory", function(data)
     DisplayActions(false)
     source        = GetPlayerServerId(PlayerId())
     local SPlayerDatas           = exports.infinity_core:GetPlayerSession(source)
-    TriggerServerEvent('infinity_needs:OpenInventory', source, SPlayerDatas._Inventory)
+    TriggerServerEvent('infinity_needs:OpenInventory', source, SPlayerDatas and SPlayerDatas._Inventory or {})
 end)
 
 --- CLOSE FUNCT -----
@@ -273,14 +281,14 @@ end)
 function cash()
     animationSatchel()
     local PlayerDatas = GetPlayerSession(source)
-    local PlayerCash  = tonumber(roundValue(PlayerDatas._Cash,2))
-    exports.infinity_core:notification(source, "Your Cash", PlayerCash.." "..Config.Devise,"center_right","infinitycore",2500)
+    local PlayerCash  = tonumber(roundValue(PlayerDatas and PlayerDatas._Cash or 0,2))
+    exports.infinity_core:notification(source, "Your Cash", PlayerCash.." "..(Config and Config.Devise or '$'),"center_right","infinitycore",2500)
 end
 
 function gold()
     animationSatchel()
     local PlayerDatas    = GetPlayerSession(source)
-    local PlayerGolds    = tonumber(roundValue(PlayerDatas._Gold,2))
+    local PlayerGolds    = tonumber(roundValue(PlayerDatas and PlayerDatas._Gold or 0,2))
     exports.infinity_core:notification(source,"Your Golds", PlayerGolds, "center_right", "infinitycore",2500)
 end
 
@@ -300,7 +308,7 @@ function hp()
 end
 
 function die()
-    playerPed       = PlayerPedId() 
+    playerPed       = PlayerPedId()
     antimationSuicide()
     Wait(1600)
     ApplyDamageToPed(playerPed, 500000, false, true, true)
@@ -321,7 +329,7 @@ function Bandana()
     else
         bandana = true
     end
-    if bandana == false then 
+    if bandana == false then
         Citizen.InvokeNative(0xAE72E7DF013AAA61,PlayerPedId(),GetHashKey("KIT_BANDANA"), GetHashKey("BANDANA_OFF_RIGHT_HAND"), 1, 0, -1082130432)
         Wait(1500)
         Citizen.InvokeNative(0x1902C4CFCC5BE57C,PlayerPedId(), -972364774)
@@ -370,10 +378,10 @@ function ToggleRaiseHands()
 	if not enabled then
 		LowerHands()
 	end
-    if not control then 
-        control = true 
+    if not control then
+        control = true
     else
-        control = false 
+        control = false
     end
     CreateThread(function()
         RequestAnimDict(dict)
@@ -416,7 +424,7 @@ AddEventHandler('infinity_core:coords', function(source)
         coords = true
         DisplayRadar(true)
         SetMinimapType(Config.TypeRadarCompass)
-        if not IsPedOnMount(PlayerPedId()) then 
+        if not IsPedOnMount(PlayerPedId()) then
             Citizen.InvokeNative(0xB31A277C1AC7B7FF,PlayerPedId(),3,2,GetHashKey("KIT_EMOTE_ACTION_CHECK_POCKET_WATCH_1"),0,0,0,0,0)
         end
         exports.infinity_core:notification(_InfinitySource, "Compass and map Watch", "You activate your compass", "center_left", "infinitycore", 2500)
