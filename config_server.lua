@@ -74,7 +74,7 @@ Config.InitInventory = {
     { name = "bread", amount = 1, meta = {} }
 }
 --currently valentine
-Config.DefaultCords         = '{"y":-7172.64,"x":1548.32,"h":360.00,"z":62.95}'
+Config.DefaultCords         = ''
 Config.DefaultSex           = 'male'
 Config.DefaultRank          = 'player'
 Config.DefaultBank          = 0.0

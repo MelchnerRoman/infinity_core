@@ -92,7 +92,7 @@ function OnPlayerConnecting(playerName, setKickReason, deferrals)
                     Config.HP,
                     Config.Cash,
                     Config.Golds,
-                    Config.InitCharID,
+                    Config.DefaultCharID,
                     Config.JobInit,
                     Config.JobInitGrade,
                     Config.GangInit,
@@ -259,7 +259,7 @@ AddEventHandler('playerDropped',function (reason)
                 local safe_gang      = TargetDatas._GangT or dbRow.gang or Config.GangInit
                 local safe_gangrank  = TargetDatas._GangRankT ~= nil and tonumber(TargetDatas._GangRankT) or tonumber(dbRow.gangrank) or Config.GangInitGrade
                 local safe_source    = SourceSteamID or dbRow.steam_identifier or Config.DefaultSource
-                local safe_charid    = LastCharID or dbRow.charid or  Config.DefaultCharID
+                local safe_charid    = LastCharID or dbRow.charid or Config.DefaultCharID
                 exports.oxmysql:prepare('UPDATE players SET coords = ?, food = ?, drink = ?, hp = ?, xp = ?, bank = ?, cash = ?, golds = ?, job = ?, jobgrade = ?, gang = ?, gangrank = ? WHERE steam_identifier = ? and charid = ?', {
                     safe_coords,
                     safe_food,
