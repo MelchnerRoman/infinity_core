@@ -66,7 +66,13 @@ Config.Drink                = 100
 Config.InitXP               = 10
 
 -- New Default Values for strict mode
-Config.InitInventory        = '[{"amount":1,"meta":[],"name":"WEAPON_MELEE_TORCH"},{"amount":1,"meta":[],"name":"water"},{"amount":1,"meta":[],"name":"bread"}]'
+-- full list of items:
+-- https://www.rdr2mods.com/wiki/pages/list-of-rdr2-weapon-models/
+Config.InitInventory = {
+    { name = "WEAPON_MELEE_TORCH", amount = 1, meta = {} },
+    { name = "water", amount = 1, meta = {} },
+    { name = "bread", amount = 1, meta = {} }
+}
 --currently valentine
 Config.DefaultCords         = '{"y":-7172.64,"x":1548.32,"h":360.00,"z":62.95}'
 Config.DefaultSex           = 'male'

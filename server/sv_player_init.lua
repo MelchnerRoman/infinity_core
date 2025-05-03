@@ -106,7 +106,7 @@ function OnPlayerConnecting(playerName, setKickReason, deferrals)
                     Config.DefaultBanned,
                     Config.DefaultWhitelist,
                     Config.DefaultCords,
-                    Config.InitInventory,
+                    json.encode(Config.InitInventory),
                     Config.DefaultLastname,
                     Config.DefaultFirstname,
                     Config.DefaultNationality,

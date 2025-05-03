@@ -256,7 +256,7 @@ function(SaveDatas)
                 local safe_jobgrade   = SaveDatas._JobGrade  ~= nil and tonumber(SaveDatas._JobGrade)   or tonumber(dbRow.jobgrade)  or Config.JobInitGrade
                 local safe_gang       = SaveDatas._Gang      ~= nil and SaveDatas._Gang                  or dbRow.gang                or Config.GangInit
                 local safe_gangrank   = SaveDatas._GangRank  ~= nil and tonumber(SaveDatas._GangRank)   or tonumber(dbRow.gangrank)  or Config.GangInitGrade
-                local safe_inventory  = SaveDatas._Inventory ~= nil and SaveDatas._Inventory             or dbRow.inventory           or Config.InitInventory
+                local safe_inventory  = SaveDatas._Inventory ~= nil and SaveDatas._Inventory             or dbRow.inventory           or json.encode(Config.InitInventory)
                 local _lastPosition = {
                     x = SaveDatas.p_coords_x or (dbRow.coords and (json.decode(dbRow.coords).x or Config.DefaultCords.x)) or Config.DefaultCords.x,
                     y = SaveDatas.p_coords_y or (dbRow.coords and (json.decode(dbRow.coords).y or Config.DefaultCords.y)) or Config.DefaultCords.y,
