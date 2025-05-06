@@ -54,9 +54,9 @@ function RemoveCashBank(source, bankamount)
     local SourceSteamID         = GetPlayerSource(source)
     bankamount                  = tonumber(roundValue(bankamount, 2))
     local PlayerDatas           = exports.infinity_core:GetPlayerSession(tonumber(_source))
-    local PlayerCash            = tonumber(roundValue(PlayerDatas._Cash,2))
+    local PlayerBank           = tonumber(roundValue(PlayerDatas._Bank,2))
     if SourceSteamID ~= nil then
-        if tonumber(bankamount) >= 0 and tonumber(PlayerCash) >= 0 then
+        if tonumber(bankamount) >= 0 and tonumber(PlayerBank) >= 0 then
             TriggerClientEvent('infinitycore:RefreshPlayerDatas', source, PlayerDatas._Charid, bankamount, false, false, false, false, false, false, false, false, "remove")
         end
     end
