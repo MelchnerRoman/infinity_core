@@ -41,9 +41,23 @@ function RemoveCash(source, cashamount)
     cashamount                  = tonumber(roundValue(cashamount, 2))
     local PlayerDatas           = exports.infinity_core:GetPlayerSession(tonumber(_source))
     local PlayerCash            = tonumber(roundValue(PlayerDatas._Cash,2))
-    if SourceSteamID ~= nil then 
+    if SourceSteamID ~= nil then
         if tonumber(cashamount) >= 0 and tonumber(PlayerCash) >= 0 then
             TriggerClientEvent('infinitycore:RefreshPlayerDatas', source, PlayerDatas._Charid, false, tonumber(roundValue(cashamount,2)), false, false, false, false, false, false, false, "remove")
+        end
+    end
+end
+
+-- [[ exports.infinity_core:RemoveCashBank(source, value) ]]
+function RemoveCashBank(source, bankamount)
+    _source = source
+    local SourceSteamID         = GetPlayerSource(source)
+    bankamount                  = tonumber(roundValue(bankamount, 2))
+    local PlayerDatas           = exports.infinity_core:GetPlayerSession(tonumber(_source))
+    local PlayerCash            = tonumber(roundValue(PlayerDatas._Cash,2))
+    if SourceSteamID ~= nil then
+        if tonumber(bankamount) >= 0 and tonumber(PlayerCash) >= 0 then
+            TriggerClientEvent('infinitycore:RefreshPlayerDatas', source, PlayerDatas._Charid, bankamount, false, false, false, false, false, false, false, false, "remove")
         end
     end
 end
@@ -53,10 +67,23 @@ function AddCash(source, cashamount)
     _source = source
     local SourceSteamID = GetPlayerSource(source)
     cashamount = tonumber(roundValue(cashamount, 2))
-    if SourceSteamID ~= nil then 
+    if SourceSteamID ~= nil then
         if tonumber(cashamount) >= 0.01 then
-            local PlayerDatas           = exports.infinity_core:GetPlayerSession(tonumber(_source))
+            local PlayerDatas = exports.infinity_core:GetPlayerSession(tonumber(_source))
             TriggerClientEvent('infinitycore:RefreshPlayerDatas', source, PlayerDatas._Charid, false, tonumber(cashamount), false, false, false, false, false, false, false, "add")
+        end
+    end
+end
+
+-- [[ exports.infinity_core:AddCashBank(source, value) ]]
+function AddCashBank(source, bankamount)
+    _source = source
+    local SourceSteamID = GetPlayerSource(source)
+    bankamount = tonumber(roundValue(bankamount, 2))
+    if SourceSteamID ~= nil then
+        if tonumber(bankamount) >= 0.01 then
+            local PlayerDatas = exports.infinity_core:GetPlayerSession(tonumber(_source))
+            TriggerClientEvent('infinitycore:RefreshPlayerDatas', source, PlayerDatas._Charid, bankamount, false, false, false, false, false, false, false, false, "add")
         end
     end
 end
@@ -66,7 +93,7 @@ function AddXP(source, xpAmount)
     _source                     = source
     local SourceSteamID         = GetPlayerSource(source)
     xpAmount                    = tonumber(roundValue(xpAmount, 1))
-    if SourceSteamID ~= nil then 
+    if SourceSteamID ~= nil then
         if tonumber(xpAmount) >= 1 then
             local PlayerDatas           = exports.infinity_core:GetPlayerSession(tonumber(_source))
             TriggerClientEvent('infinitycore:RefreshPlayerDatas', source, PlayerDatas._Charid, false, false, tonumber(xpAmount), false ,false, false, false,false,false, "add")
@@ -79,7 +106,7 @@ function RemoveXP(source, xpAmount)
     _source                     = source
     local SourceSteamID         = GetPlayerSource(source)
     xpAmount                    = tonumber(roundValue(xpAmount, 1))
-    if SourceSteamID ~= nil then 
+    if SourceSteamID ~= nil then
         if tonumber(xpAmount) >= 1 then
             local PlayerDatas           = exports.infinity_core:GetPlayerSession(tonumber(_source))
             TriggerClientEvent('infinitycore:RefreshPlayerDatas', source,PlayerDatas._Charid, false, false, tonumber(roundValue(xpAmount,1)), false ,false, false, false, false, false, "remove")
@@ -92,7 +119,7 @@ function RemoveGold(source, goldAmount)
     _source                     = source
     local SourceSteamID         = GetPlayerSource(source)
     goldAmount                  = tonumber(roundValue(goldAmount, 2))
-    if SourceSteamID ~= nil then 
+    if SourceSteamID ~= nil then
         if tonumber(goldAmount) >= 0.01 then
             local PlayerDatas           = exports.infinity_core:GetPlayerSession(tonumber(_source))
             TriggerClientEvent('infinitycore:RefreshPlayerDatas', source, PlayerDatas._Charid, false, false, false, tonumber(roundValue(goldAmount,2)), false, false, false, false, false, "remove")
@@ -105,7 +132,7 @@ function AddGold(source, goldAmount)
     _source                     = source
     local SourceSteamID         = GetPlayerSource(source)
     goldAmount                  = tonumber(roundValue(goldAmount, 2))
-    if SourceSteamID ~= nil then 
+    if SourceSteamID ~= nil then
         if tonumber(goldAmount) >= 0.01 then
             local PlayerDatas           = exports.infinity_core:GetPlayerSession(tonumber(_source))
             TriggerClientEvent('infinitycore:RefreshPlayerDatas', source, PlayerDatas._Charid, false, false, false, tonumber(goldAmount), false, false, false, false, false, "add")
@@ -122,10 +149,10 @@ end)
 function notification(target, title, text, position, design, duration)
 	TriggerClientEvent('infinity_core:notification',
 		target,
-		title,  		
-		text,  	
-		position,         
-		design,         
+		title,
+		text,
+		position,
+		design,
 		duration
 	)
 end
@@ -134,10 +161,10 @@ RegisterNetEvent("infinity_core:notification")
 AddEventHandler("infinity_core:notification", function(target, title, text, position, design, duration)
     TriggerClientEvent('infinity_core:notification',
         target,
-        title,  		
-        text,  	
-        position,         
-        design,         
+        title,
+        text,
+        position,
+        design,
         duration
     )
 end)

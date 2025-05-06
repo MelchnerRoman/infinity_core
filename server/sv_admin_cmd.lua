@@ -1,7 +1,7 @@
 ----
 -- [[ /clearchat ]]
 ----
-RegisterCommand("clearchat", function(source, args) 
+RegisterCommand("clearchat", function(source, args)
     local PlayerDatas = exports.infinity_core:GetPlayerSession(source)
     rankAdmin = PlayerDatas._Rank
     if rankAdmin == Config.PermClearChat01 or rankAdmin == Config.PermClearChat02 then
@@ -12,7 +12,7 @@ end, true)
 ----
 -- [[ /kill id ]]
 ----
-RegisterCommand("kill", function(source, args) 
+RegisterCommand("kill", function(source, args)
     local PlayerDatas = exports.infinity_core:GetPlayerSession(source)
     rankAdmin = PlayerDatas._Rank
     if rankAdmin == Config.PermKillPlayer01 or rankAdmin == Config.PermKillPlayer02 then
@@ -23,7 +23,7 @@ end, true)
 ----
 -- [[ /revive id ]]
 ----
-RegisterCommand("revive", function(source, args) 
+RegisterCommand("revive", function(source, args)
     local PlayerDatas = exports.infinity_core:GetPlayerSession(source)
     rankAdmin = PlayerDatas._Rank
     if rankAdmin == Config.PermRevivePlayer01 or rankAdmin == Config.PermRevivePlayer02 then
@@ -43,7 +43,7 @@ RegisterCommand("setcash", function(source, args, rawCommand)
         if args[1] == nil or args[2] == nil then
             exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
         else
-            TriggerEvent("infinity_core:setCash", source, args[1], args[2],  
+            TriggerEvent("infinity_core:setCash", source, args[1], args[2],
             function(cb)
             end)
         end
@@ -90,7 +90,24 @@ RegisterCommand("removecash", function(source, args, rawCommand)
         if args[1] == nil or args[2] == nil then
             exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
         else
-            TriggerEvent("infinity_core:removeCash", source, args[1], args[2],  
+            TriggerEvent("infinity_core:removeCash", source, args[1], args[2],
+            function(cb)
+            end)
+        end
+    end
+end, true)
+
+----
+-- [[ /removecashbank id amount ]]
+----
+RegisterCommand("removecashbank", function(source, args, rawCommand)
+    local PlayerDatas = exports.infinity_core:GetPlayerSession(source)
+    rankAdmin = PlayerDatas._Rank
+    if rankAdmin == Config.PermManageCash01 or rankAdmin == Config.PermManageCash02 then
+        if args[1] == nil or args[2] == nil then
+            exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
+        else
+            TriggerEvent("infinity_core:removeCashBank", source, args[1], args[2],
             function(cb)
             end)
         end
@@ -107,7 +124,7 @@ RegisterCommand("setxp", function(source, args, rawCommand)
         if args[1] == nil or args[2] == nil then
             exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
         else
-            TriggerEvent("infinity_core:setXP", source, args[1], args[2],  
+            TriggerEvent("infinity_core:setXP", source, args[1], args[2],
             function(cb)
             end)
         end
@@ -124,7 +141,7 @@ RegisterCommand("addxp", function(source, args, rawCommand)
         if args[1] == nil or args[2] == nil then
             exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
         else
-            TriggerEvent("infinity_core:addXP", source, args[1], args[2],  
+            TriggerEvent("infinity_core:addXP", source, args[1], args[2],
             function(cb)
             end)
         end
@@ -141,7 +158,7 @@ RegisterCommand("removexp", function(source, args, rawCommand)
         if args[1] == nil or args[2] == nil then
             exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
         else
-            TriggerEvent("infinity_core:removeXP", source, args[1], args[2],  
+            TriggerEvent("infinity_core:removeXP", source, args[1], args[2],
             function(cb)
             end)
         end
@@ -158,7 +175,7 @@ RegisterCommand("setrank", function(source, args, rawCommand)
         if args[1] == nil or args[2] == nil then
             exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
         else
-            TriggerEvent("infinity_core:setRank", source, args[1], args[2],  
+            TriggerEvent("infinity_core:setRank", source, args[1], args[2],
             function(cb)
             end)
         end
@@ -175,7 +192,7 @@ RegisterCommand("setgold", function(source, args, rawCommand)
         if args[1] == nil or args[2] == nil then
             exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
         else
-            TriggerEvent("infinity_core:setGold", source, args[1], args[2],  
+            TriggerEvent("infinity_core:setGold", source, args[1], args[2],
             function(cb)
             end)
         end
@@ -192,7 +209,7 @@ RegisterCommand("addgold", function(source, args, rawCommand)
         if args[1] == nil or args[2] == nil then
             exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
         else
-            TriggerEvent("infinity_core:addGold", source, args[1], args[2],  
+            TriggerEvent("infinity_core:addGold", source, args[1], args[2],
             function(cb)
             end)
         end
@@ -209,7 +226,7 @@ RegisterCommand("removegold", function(source, args, rawCommand)
         if args[1] == nil or args[2] == nil then
             exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
         else
-            TriggerEvent("infinity_core:removeGold", source, args[1], args[2],  
+            TriggerEvent("infinity_core:removeGold", source, args[1], args[2],
             function(cb)
             end)
         end
@@ -226,7 +243,7 @@ RegisterCommand("setjob", function(source, args, rawCommand)
         if args[1] == nil or args[2] == nil or args[3] == nil then
             exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
         else
-            TriggerEvent("infinity_core:setJob", source, args[1], args[2], args[3],  
+            TriggerEvent("infinity_core:setJob", source, args[1], args[2], args[3],
             function(cb)
             end)
         end
@@ -243,7 +260,7 @@ RegisterCommand("setgang", function(source, args, rawCommand)
         if args[1] == nil or args[2] == nil or args[3] == nil then
             exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
         else
-            TriggerEvent("infinity_core:setGang", source, args[1], args[2], args[3],  
+            TriggerEvent("infinity_core:setGang", source, args[1], args[2], args[3],
             function(cb)
             end)
         end
@@ -260,7 +277,7 @@ RegisterCommand('kick', function(source, args, rawCommand)
         if args[1] == nil or args[2] == nil then
             exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
         else
-            TriggerEvent("infinity_core:kick", source, args[1], args[2],  
+            TriggerEvent("infinity_core:kick", source, args[1], args[2],
             function(cb)
             end)
         end
@@ -277,7 +294,7 @@ RegisterCommand('ban', function(source, args, rawCommand)
         if args[1] == nil or args[2] == nil then
             exports.infinity_core:notification(source,"Wrong Command", Config.Lang_BadArguments, "center_bottom", "redm_min", 1500)
         else
-            TriggerEvent("infinity_core:ban", source, args[1], args[2],  
+            TriggerEvent("infinity_core:ban", source, args[1], args[2],
             function(cb)
             end)
         end
@@ -322,10 +339,10 @@ end, true)
 ----
 RegisterCommand("playerefresh", function(source, args, rawCommand)
     local Admin = exports.infinity_core:GetPlayerSession(source)
-    if Admin._Rank == "superadmin" then 
-        if args[1] ~= nil then 
+    if Admin._Rank == "superadmin" then
+        if args[1] ~= nil then
             PlayerTarget = args[1]
-            GetPlayerTarget(PlayerTarget) 
+            GetPlayerTarget(PlayerTarget)
             if TargetSteamID then
                 local PlayerDatas            = exports.infinity_core:GetPlayerTargetSession(tonumber(PlayerTarget))
                 local TargetSteamID, result  = GetPlayersTargetDatas(PlayerTarget, PlayerDatas._CharidT)
@@ -337,7 +354,7 @@ RegisterCommand("playerefresh", function(source, args, rawCommand)
                 GANGCORE            = result.gang
                 GANGRANKCORE        = result.gangank
                 TriggerClientEvent('infinitycore:RefreshPlayerDatas',PlayerTarget, PlayerDatas._CharidT, false, tonumber(CASHCORE), tonumber(XPCORE), tonumber(GOLDCORE), JOBCORE, JOBGCORE, GANGCORE, GANGRANKCORE, false, "refresh")
-                exports.infinity_core:notification(PlayerTarget, "Your datas are refresh", 
+                exports.infinity_core:notification(PlayerTarget, "Your datas are refresh",
                 "An admin have set new datas for your account <br>"..CASHCORE.." $ <br> "..XPCORE.." XP <br>"..GOLDCORE.." Golds",
                 "center_bottom","redm",2500)
             end
@@ -350,7 +367,7 @@ end, true)
 ----
 RegisterCommand("tpm", function(source, args, rawCommand)
     local Admin = exports.infinity_core:GetPlayerSession(source)
-    if Admin._Rank == "superadmin" or Admin._Rank == "admin" then 
+    if Admin._Rank == "superadmin" or Admin._Rank == "admin" then
         TriggerClientEvent('infinitycore:gotomarker', source)
     end
 end, true)
@@ -360,11 +377,11 @@ end, true)
 ----
 RegisterCommand("jail", function(source, args, rawCommand)
     local Admin = exports.infinity_core:GetPlayerSession(source)
-    if Admin._Rank == "superadmin" or Admin._Rank == "admin" then 
+    if Admin._Rank == "superadmin" or Admin._Rank == "admin" then
         if args[1] ~= nil then
             local Target = tonumber(args[1])
             TriggerClientEvent('infinitycore:jail', Target)
-            exports.infinity_core:notification(Target, "<b class='text-danger'>Jailed by Admin</b>", 
+            exports.infinity_core:notification(Target, "<b class='text-danger'>Jailed by Admin</b>",
             "Enjoy with the rats",
             "center_bottom","redm",2500)
         end
@@ -376,16 +393,16 @@ end, true)
 ----
 RegisterCommand("freeze", function(source, args, rawCommand)
     local Admin = exports.infinity_core:GetPlayerSession(source)
-    if Admin._Rank == "superadmin" or Admin._Rank == "admin" or Admin._Rank == "modo" then 
+    if Admin._Rank == "superadmin" or Admin._Rank == "admin" or Admin._Rank == "modo" then
         if args[1] ~= nil and args[2] ~= nil then
             local Target = tonumber(args[1])
             local Freeze = args[2]
             TriggerClientEvent('infinity_core:freeze', Target, Freeze)
-            if Freeze == "true" then 
-                exports.infinity_core:notification(Target, "<b class='text-danger'>FREEZE by Admin</b>", 
+            if Freeze == "true" then
+                exports.infinity_core:notification(Target, "<b class='text-danger'>FREEZE by Admin</b>",
                 "","center_bottom","redm",2500)
             elseif Freeze == "false" then
-                exports.infinity_core:notification(Target, "<b class='text-success'>UNFREEZE by Admin</b>", 
+                exports.infinity_core:notification(Target, "<b class='text-success'>UNFREEZE by Admin</b>",
                 "","center_bottom","redm",2500)
             end
         end
@@ -418,11 +435,11 @@ AddEventHandler("infinity_core:inspect", function(source, PlayerTarget)
             ..TargetDatas._CashT.."<span class='text-success'>$</span><br>"
             ..TargetDatas._GoldT.."<span class='text-warning'>Golds</span><br>"
             ..TargetDatas._XpT.."<span class='text-info'>Xp</span><br> <span class='text-danger'>Rank</span> "
-            ..TargetDatas._RankT,  	
-            "center_bottom",         
-            "redm_min",           
+            ..TargetDatas._RankT,
+            "center_bottom",
+            "redm_min",
             9500
-        )  
+        )
     else
         print('^1 no player founded!')
     end
@@ -434,7 +451,7 @@ end)
 RegisterCommand("dv", function(source, args, rawCommand)
     local _source   = source
     local Admin     = exports.infinity_core:GetPlayerSession(source)
-    if Admin._Rank == "superadmin" or Admin._Rank == "admin" or Admin._Rank == "modo" then 
+    if Admin._Rank == "superadmin" or Admin._Rank == "admin" or Admin._Rank == "modo" then
         TriggerClientEvent('infinity_core:deleteveh', _source)
     end
 end, true)
@@ -445,7 +462,7 @@ end, true)
 RegisterCommand("dh", function(source, args, rawCommand)
     local _source   = source
     local Admin     = exports.infinity_core:GetPlayerSession(source)
-    if Admin._Rank == "superadmin" or Admin._Rank == "admin" or Admin._Rank == "modo" then 
+    if Admin._Rank == "superadmin" or Admin._Rank == "admin" or Admin._Rank == "modo" then
         TriggerClientEvent('infinity_core:deletehorse', _source)
     end
 end, true)
@@ -456,7 +473,7 @@ end, true)
 RegisterCommand("ghostmod", function(source, args, rawCommand)
     local _source   = source
     local Admin     = exports.infinity_core:GetPlayerSession(source)
-    if Admin._Rank == "superadmin" or Admin._Rank == "admin" or Admin._Rank == "modo" then 
+    if Admin._Rank == "superadmin" or Admin._Rank == "admin" or Admin._Rank == "modo" then
         TriggerClientEvent('infinity_core:ghostmod', _source)
     end
 end, true)
@@ -467,7 +484,7 @@ end, true)
 RegisterCommand("godmod", function(source, args, rawCommand)
     local _source   = source
     local Admin     = exports.infinity_core:GetPlayerSession(source)
-    if Admin._Rank == "superadmin" or Admin._Rank == "admin" or Admin._Rank == "modo" then 
+    if Admin._Rank == "superadmin" or Admin._Rank == "admin" or Admin._Rank == "modo" then
         TriggerClientEvent('infinity_core:godmod', _source)
     end
 end, true)
