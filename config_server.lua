@@ -92,3 +92,5 @@ Config.DefaultNationality   = nil
 Config.DefaultYears         = 18
 Config.DefaultReason        = nil
 Config.DefaultLastOnline    = nil
+
+Config.CallbackTimeout      = 10000                 -- Default timeout for callbacks (in ms)

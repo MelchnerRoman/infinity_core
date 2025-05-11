@@ -7,20 +7,37 @@ function roundValue(number, decimals)
     return math.floor(number * power) / power
 end
 
-function infinityPrint(tbl, indent)
+function infinityPrint(data, indent)
     if not indent then indent = 0 end
-    for k, v in pairs(tbl) do
-        formatting = string.rep("  ", indent) .. k .. ": "
+    
+    -- Si c'est une chaîne de caractères, simplement l'afficher
+    if type(data) == "string" then
+        print(data)
+        return
+    end
+    
+    -- Si c'est nil, afficher un message
+    if data == nil then
+        print("nil")
+        return
+    end
+    
+    -- Si ce n'est pas une table, convertir en chaîne
+    if type(data) ~= "table" then
+        print(tostring(data))
+        return
+    end
+    
+    -- Traitement de la table
+    for k, v in pairs(data) do
+        local formatting = string.rep("  ", indent) .. k .. ": "
         if type(v) == "table" then
-        print(formatting)
-        infinityPrint(v, indent+1)
-        return formatting
+            print(formatting)
+            infinityPrint(v, indent+1)
         else
-        print(formatting .. v)
-        return formatting
+            print(formatting .. tostring(v))
         end
     end
-    return formatting
 end
 
 function getSex()
